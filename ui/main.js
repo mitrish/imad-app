@@ -1,12 +1,23 @@
 var button = document.getElementById('counter');
-var counter =0;
+
 button.onclick = function () {
-  // make a request to the counter variable
-  
+  // make a request to the counter endpoint
+    var request = new XMLHttpRequest();
   // Capture the response and store it in a variable
-  
-  // render the value of the counter variable in the span element of the html code
-  counter += 1;
-  var span = document.getElementById('count');
-  span.innerHTML = counter.toString();
+    request.onreadystatechange = function (){
+        if(request.readyState === XMLHttpRequest.DONE){
+            //take some action
+            if(request.status === 200){
+                var counter = request.responseText;
+                 var span = document.getElementById('count');
+                 span.innerHTML = counter.toString();
+            }
+        } 
+        // NOt done yet
+    };
+//make a request
+request.open('GET','http://rishabhmittal200.imad.hasura-app.io/counter', true);
+request.send(null);
+
+ 
 };
