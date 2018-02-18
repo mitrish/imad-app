@@ -28,7 +28,7 @@ var articles ={
     content:
     ` <p>
             This is the conetent for my second article.
-            </p>`  
+            </p>`
 },
 "article-three":{
      title:'  Article one | Rishabh Mittal',
@@ -46,7 +46,7 @@ function createTemplate(data){
  var content=data.content;
  var heading=data.heading;
 
-var htmlTemplate = 
+var htmlTemplate =
 `<html>
     <head>
         <title>
@@ -100,7 +100,15 @@ app.get('/:articleNames', function (req,res){
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
-
+var names = [];
+app.get('/submit-name/:name',function(req,res){
+  //Get teh name from request object
+  var name = req.params.name;
+  names.push(name);
+  // JSON: javascript Object Notation
+  res.send(JSON.stringify(names));
+  //res.send(names);
+})
 
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
